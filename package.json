@@ -19,6 +19,6 @@
     "jest": "^29.7.0"
   },
   "bin": {
-    "css-cleanup": "./bin/cli.js"
+    "css-cleanup": "bin/cli.js"
   }
 }
