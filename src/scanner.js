@@ -5,7 +5,7 @@ import postcss from "postcss";
 import sass from "sass";
 import * as cheerio from "cheerio";
 import chalk from "chalk";
-import { parse as parseJSX } from "react-docgen"; // This helps to parse JSX files for CSS classes.
+import { parse as parseJSX } from "react-docgen";
 
 export function scan(targetPath) {
   console.log(chalk.blue("Scanning for unused CSS selectors..."));
@@ -51,7 +51,6 @@ export function scan(targetPath) {
     });
 
     if (file.endsWith(".jsx")) {
-      // Parse JSX files to extract class names and IDs
       const jsxContent = content;
       const jsxClasses = extractJsxClasses(jsxContent);
       usedSelectors.push(...jsxClasses);
