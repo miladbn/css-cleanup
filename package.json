@@ -1,6 +1,6 @@
 {
   "name": "css-cleanup",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "CSS Cleanup is a command-line tool designed to help developers keep their stylesheets clean and efficient by identifying and removing unused CSS selectors from their projects",
   "main": "src/index.js",
   "type": "module",
