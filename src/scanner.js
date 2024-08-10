@@ -7,7 +7,7 @@ import chalk from "chalk";
 
 // Rest of your code
 
-function scan(targetPath) {
+export function scan(targetPath) {
   console.log(chalk.blue("Scanning for unused CSS selectors..."));
 
   // Find all CSS files
@@ -53,5 +53,3 @@ function scan(targetPath) {
   console.log(chalk.green(`Unused selectors found: ${unusedSelectors.length}`));
   unusedSelectors.forEach((selector) => console.log(selector));
 }
-
-module.exports = { scan };

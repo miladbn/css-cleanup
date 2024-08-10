@@ -2,7 +2,7 @@
 import { program } from "commander";
 import { scan } from "../src/scanner.js";
 import { report } from "../src/reporter.js";
-// import { remove } from "../src/remover.js";
+// export { remove } from "../src/remover.js";
 program
   .command("scan <path>")
   .description("Scan project for unused CSS")
