@@ -12,20 +12,32 @@ export function scan(targetPath) {
   const cssFiles = glob.sync(path.join(targetPath, "**/*.{css,scss}"));
   const selectors = new Set();
 
-  // Collect selectors from CSS/SCSS files
+  // Ensure we are finding and reading CSS/SCSS files
+  if (cssFiles.length === 0) {
+    console.log(chalk.red("No CSS or SCSS files found!"));
+    return;
+  }
+
   cssFiles.forEach((file) => {
+    console.log(chalk.blue(`Processing file: ${file}`));
+
     try {
       let css = "";
 
       if (file.endsWith(".scss")) {
+        console.log(chalk.yellow("Compiling SCSS file..."));
         const result = sass.renderSync({ file });
         css = result.css.toString();
       } else {
+        console.log(chalk.yellow("Reading CSS file..."));
         css = fs.readFileSync(file, "utf-8");
       }
 
+      console.log(chalk.green(`File content:\n${css}`));
+
       const root = postcss.parse(css);
       root.walkRules((rule) => {
+        console.log(chalk.cyan(`Selector found: ${rule.selector}`));
         selectors.add(rule.selector.trim());
       });
     } catch (err) {
@@ -37,6 +49,11 @@ export function scan(targetPath) {
     chalk.yellow(`Selectors found in CSS/SCSS: ${Array.from(selectors)}`)
   );
 
+  // No need to proceed further if no selectors were found
+  if (selectors.size === 0) {
+    console.log(chalk.red("No selectors found in CSS/SCSS files."));
+    return;
+  }
   const htmlFiles = glob.sync(path.join(targetPath, "**/*.{html,js,jsx}"));
   const usedSelectors = new Set();
 
