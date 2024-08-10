@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-const { program } = require("commander");
-const { scan } = require("../src/scanner");
-const { report } = require("../src/reporter");
-const { remove } = require("../src/remover");
-
+import { program } from "commander";
+import { scan } from "../src/scanner.js";
+import { report } from "../src/reporter.js";
+import { remove } from "../src/remover.js";
 program
   .command("scan <path>")
   .description("Scan project for unused CSS")
