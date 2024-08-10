@@ -15,7 +15,9 @@
     "cheerio": "^1.0.0",
     "commander": "^12.1.0",
     "glob": "^11.0.0",
-    "postcss": "^8.4.41"
+    "postcss": "^8.4.41",
+    "sass": "1.77.8",
+    "react-docgen": "7.0.3"
   },
   "devDependencies": {
     "jest": "^29.7.0"
