@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import glob from "glob";
 import postcss from "postcss";
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import chalk from "chalk";
 
 // Rest of your code
