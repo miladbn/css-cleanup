@@ -1,10 +1,11 @@
-// src/scanner.js
-const fs = require("fs");
-const path = require("path");
-const glob = require("glob");
-const postcss = require("postcss");
-const cheerio = require("cheerio");
-const chalk = require("chalk");
+import fs from "fs";
+import path from "path";
+import glob from "glob";
+import postcss from "postcss";
+import cheerio from "cheerio";
+import chalk from "chalk";
+
+// Rest of your code
 
 function scan(targetPath) {
   console.log(chalk.blue("Scanning for unused CSS selectors..."));
