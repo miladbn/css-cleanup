@@ -2,10 +2,23 @@
   "name": "css-cleanup",
   "version": "1.0.0",
   "description": "CSS Cleanup is a command-line tool designed to help developers keep their stylesheets clean and efficient by identifying and removing unused CSS selectors from their projects",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "miladbn",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "cheerio": "^1.0.0",
+    "commander": "^12.1.0",
+    "glob": "^11.0.0",
+    "postcss": "^8.4.41"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "bin": {
+    "css-cleanup": "./bin/cli.js"
+  }
 }
