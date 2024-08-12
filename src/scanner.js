@@ -12,7 +12,6 @@ export function scan(targetPath) {
   const cssFiles = glob.sync(path.join(targetPath, "**/*.{css,scss}"));
   const selectors = new Set();
 
-  // Ensure we are finding and reading CSS/SCSS files
   if (cssFiles.length === 0) {
     console.log(chalk.red("No CSS or SCSS files found!"));
     return;
@@ -33,12 +32,11 @@ export function scan(targetPath) {
         css = fs.readFileSync(file, "utf-8");
       }
 
-      console.log(chalk.green(`File content:\n${css}`));
-
       const root = postcss.parse(css);
       root.walkRules((rule) => {
-        console.log(chalk.cyan(`Selector found: ${rule.selector}`));
-        selectors.add(rule.selector.trim());
+        const selector = rule.selector.trim();
+        console.log(chalk.cyan(`Selector found: ${selector}`));
+        selectors.add(selector);
       });
     } catch (err) {
       console.error(chalk.red(`Error processing file ${file}: ${err.message}`));
@@ -46,18 +44,17 @@ export function scan(targetPath) {
   });
 
   console.log(
-    chalk.yellow(`Selectors found in CSS/SCSS: ${Array.from(selectors)}`)
+    chalk.yellow(`Selectors found in CSS/SCSS: ${Array.from(selectors).length}`)
   );
 
-  // No need to proceed further if no selectors were found
   if (selectors.size === 0) {
     console.log(chalk.red("No selectors found in CSS/SCSS files."));
     return;
   }
+
   const htmlFiles = glob.sync(path.join(targetPath, "**/*.{html,js,jsx}"));
   const usedSelectors = new Set();
 
-  // Collect used selectors from HTML/JSX files
   htmlFiles.forEach((file) => {
     try {
       const content = fs.readFileSync(file, "utf-8");
@@ -81,10 +78,11 @@ export function scan(targetPath) {
   });
 
   console.log(
-    chalk.yellow(`Selectors found in HTML/JSX: ${Array.from(usedSelectors)}`)
+    chalk.yellow(
+      `Selectors found in HTML/JSX: ${Array.from(usedSelectors).length}`
+    )
   );
 
-  // Compare and find unused selectors
   const unusedSelectors = Array.from(selectors).filter(
     (selector) => !usedSelectors.has(selector)
   );
